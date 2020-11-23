@@ -1,4 +1,19 @@
-﻿using System.Collections;
+﻿/*
+ * File: DestroyOutOfBounds.cs
+ * Project: Unity Junior Programmer Pathway - Prototype 2
+ * File Created: Monday, 23rd November 2020 8:55:44 PM
+ * Author: nknab
+ * Email: bkojo21@gmail.com
+ * Version: 1.0
+ * Brief: 
+ * -----
+ * Last Modified: Monday, 23rd November 2020 9:21:06 PM
+ * Modified By: nknab
+ * -----
+ * Copyright ©2020 nknab
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
