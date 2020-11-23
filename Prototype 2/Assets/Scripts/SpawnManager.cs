@@ -7,11 +7,12 @@
  * Version: 1.0
  * Brief: 
  * -----
- * Last Modified: Monday, 23rd November 2020 9:21:21 PM
+ * Last Modified: Monday, 23rd November 2020 10:25:27 PM
  * Modified By: nknab
  * -----
  * Copyright ©2020 nknab
  */
+
 
 using System.Collections;
 using System.Collections.Generic;
@@ -21,11 +22,15 @@ public class SpawnManager : MonoBehaviour
 {
     private float _spawnRangeX = 20;
     private float _spawnRangeZ = 20;
+    private float _startDelay = 2.0f;
+    private float _spawnInterval = 1.5f;
+
     public GameObject[] animalPrefabs_;
 
     // Start is called before the first frame update
     void Start()
     {
+        InvokeRepeating("SpawnRandomAnimal", _startDelay, _spawnInterval);
 
     }
 
@@ -33,15 +38,16 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Vector3 spawnPos = new Vector3(Random.Range(-_spawnRangeX, _spawnRangeX), 0, _spawnRangeZ);
+    }
 
-            int animalIndex = Random.Range(0, animalPrefabs_.Length);
-            // Launch projectile from player when Spacebar is pressed.
+    void SpawnRandomAnimal()
+    {
 
-            Instantiate(animalPrefabs_[animalIndex], spawnPos, animalPrefabs_[animalIndex].transform.rotation);
-        }
+        Vector3 spawnPos = new Vector3(Random.Range(-_spawnRangeX, _spawnRangeX), 0, _spawnRangeZ);
+
+        int animalIndex = Random.Range(0, animalPrefabs_.Length);
+
+        Instantiate(animalPrefabs_[animalIndex], spawnPos, animalPrefabs_[animalIndex].transform.rotation);
 
     }
 }

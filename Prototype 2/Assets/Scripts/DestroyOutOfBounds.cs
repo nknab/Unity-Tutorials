@@ -7,7 +7,7 @@
  * Version: 1.0
  * Brief: 
  * -----
- * Last Modified: Monday, 23rd November 2020 9:21:06 PM
+ * Last Modified: Monday, 23rd November 2020 10:25:15 PM
  * Modified By: nknab
  * -----
  * Copyright ©2020 nknab
@@ -19,7 +19,8 @@ using UnityEngine;
 
 public class DestroyOutOfBounds : MonoBehaviour
 {
-    private float _topBound = 30.0f;
+    private float _topBound = 40.0f;
+    private float _lowerBound = -20.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,8 +34,9 @@ public class DestroyOutOfBounds : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else if (transform.position.z < -_topBound)
+        else if (transform.position.z < _lowerBound)
         {
+            Debug.Log("Game Over");
             Destroy(gameObject);
         }
     }
