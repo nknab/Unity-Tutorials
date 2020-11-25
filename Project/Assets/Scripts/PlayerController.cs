@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    private float _jumpForce = 700.0f;
-    private bool _isOnGround, _gameOver = false;
+    private float _jumpForce = 600.0f;
+    private bool _isOnGround, _gameOver, _powerUp = false;
 
 
     private Rigidbody _playerRB;
@@ -41,6 +41,15 @@ public class PlayerController : MonoBehaviour
         {
             _gameOver = true;
             Debug.Log("Game Over!");
+        } 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("TassCoin"))
+        {
+            Destroy(other.gameObject);
+            _powerUp = true;
         }
     }
 }
