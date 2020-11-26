@@ -37,35 +37,43 @@ public class Target : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Destroy(gameObject);
-        Instantiate(explosionParticle_, transform.position, explosionParticle_.transform.rotation);
-
-        int index = 0;
-
-        if (gameObject.CompareTag("Good 1"))
+        if (_gameManager.GetIsGameActive())
         {
-            index = 0;
-        }
-        else if (gameObject.CompareTag("Good 2"))
-        {
-            index = 1;
-        }
-        else if (gameObject.CompareTag("Good 3"))
-        {
-            index = 2;
-        }
-        else if (gameObject.CompareTag("Bad 1"))
-        {
-            index = 3;
-        }
+            Destroy(gameObject);
+            Instantiate(explosionParticle_, transform.position, explosionParticle_.transform.rotation);
+
+            int index = 0;
+
+            if (gameObject.CompareTag("Good 1"))
+            {
+                index = 0;
+            }
+            else if (gameObject.CompareTag("Good 2"))
+            {
+                index = 1;
+            }
+            else if (gameObject.CompareTag("Good 3"))
+            {
+                index = 2;
+            }
+            else if (gameObject.CompareTag("Bad 1"))
+            {
+                index = 3;
+            }
 
 
-        _gameManager.UpdateScore(_pointValue[index]);
+            _gameManager.UpdateScore(_pointValue[index]);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
+
+        if (!gameObject.CompareTag("Bad 1"))
+        {
+            _gameManager.GameOver();
+        }
     }
 
     private Vector3 RandomForce()
