@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 {
     private int _score;
 
-    private float _spawnRate = 1.0f;
+    private float _spawnRate = 5.0f;
 
     private bool _isGameActive;
 
@@ -21,12 +21,12 @@ public class GameManager : MonoBehaviour
 
     public Button restartButton_;
 
+    public GameObject titleScreen_;
+
     // Start is called before the first frame update
     void Start()
     {
-        _isGameActive = true;
-        UpdateScore(0);
-        StartCoroutine(SpawnTarget());
+        
     }
 
     // Update is called once per frame
@@ -67,5 +67,15 @@ public class GameManager : MonoBehaviour
     public bool GetIsGameActive()
     {
         return _isGameActive;
+    }
+
+    public void StartGame(int _diffficulty_)
+    {
+        _isGameActive = true;
+        
+        UpdateScore(0);
+        titleScreen_.gameObject.SetActive(false);
+        _spawnRate /= _diffficulty_;
+        StartCoroutine(SpawnTarget());
     }
 }

@@ -44,21 +44,20 @@ public class Target : MonoBehaviour
 
             int index = 0;
 
-            if (gameObject.CompareTag("Good 1"))
+            switch (gameObject.name)
             {
-                index = 0;
-            }
-            else if (gameObject.CompareTag("Good 2"))
-            {
-                index = 1;
-            }
-            else if (gameObject.CompareTag("Good 3"))
-            {
-                index = 2;
-            }
-            else if (gameObject.CompareTag("Bad 1"))
-            {
-                index = 3;
+                case "Good 1(Clone)":
+                    index = 0;
+                    break;
+                case "Good 2(Clone)":
+                    index = 1;
+                    break;
+                case "Good 3(Clone)":
+                    index = 2;
+                    break;
+                case "Bad(Clone)":
+                    index = 3;
+                    break;
             }
 
 
@@ -70,7 +69,7 @@ public class Target : MonoBehaviour
     {
         Destroy(gameObject);
 
-        if (!gameObject.CompareTag("Bad 1"))
+        if (!(gameObject.name.Equals("Bad(Clone)")))
         {
             _gameManager.GameOver();
         }
