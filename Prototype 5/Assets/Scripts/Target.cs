@@ -10,7 +10,13 @@ public class Target : MonoBehaviour
     private float _xRange = 4.0f;
     private float _ySpawnPos = -2.0f;
 
+    private int[] _pointValue = { 15, 10, 5, -10 };
+
     private Rigidbody _targetRb;
+
+    private GameManager _gameManager;
+
+    public ParticleSystem explosionParticle_;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +25,8 @@ public class Target : MonoBehaviour
         _targetRb.AddForce(RandomForce(), ForceMode.Impulse);
         _targetRb.AddTorque(RandomTorque(), RandomTorque(), RandomTorque(), ForceMode.Impulse);
         transform.position = RandomSpawnPos();
+
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -30,6 +38,29 @@ public class Target : MonoBehaviour
     private void OnMouseDown()
     {
         Destroy(gameObject);
+        Instantiate(explosionParticle_, transform.position, explosionParticle_.transform.rotation);
+
+        int index = 0;
+
+        if (gameObject.CompareTag("Good 1"))
+        {
+            index = 0;
+        }
+        else if (gameObject.CompareTag("Good 2"))
+        {
+            index = 1;
+        }
+        else if (gameObject.CompareTag("Good 3"))
+        {
+            index = 2;
+        }
+        else if (gameObject.CompareTag("Bad 1"))
+        {
+            index = 3;
+        }
+
+
+        _gameManager.UpdateScore(_pointValue[index]);
     }
 
     private void OnTriggerEnter(Collider other)
