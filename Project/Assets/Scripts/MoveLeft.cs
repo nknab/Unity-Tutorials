@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveLeft : MonoBehaviour
 {
-    private float _speed = 5.0f;
+    private float _speed = .0f;
     private float _leftBound = -30.0f;
 
     private Rigidbody _objectRb;
@@ -18,7 +18,7 @@ public class MoveLeft : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _objectRb.AddForce(Vector3.left * _speed);
+        _objectRb.AddForce(Vector3.left * _speed, ForceMode.Force);
 
         if(transform.position.x < _leftBound)
         {

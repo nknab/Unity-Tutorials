@@ -17,8 +17,8 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
 
-        InvokeRepeating("SpawnBarrier", _startDelay, _barrierDelay);
-        InvokeRepeating("SpawnTassCoin", _startDelay, _tassCoinDelay);
+        //InvokeRepeating("SpawnBarrier", _startDelay, _barrierDelay);
+        //InvokeRepeating("SpawnTassCoin", _startDelay, _tassCoinDelay);
     }
 
     // Update is called once per frame
@@ -29,7 +29,8 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnBarrier()
     {
-        int index = Random.Range(0, barriers_.Length);
+        //int index = Random.Range(0, barriers_.Length);
+        int index = 0;
         Instantiate(barriers_[index], barriers_[index].gameObject.transform.position, barriers_[index].gameObject.transform.rotation);
     }
 
