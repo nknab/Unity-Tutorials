@@ -20,7 +20,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Declaring and initializing variables.
-    private float _speed = 15.0f;
+    [SerializeField] private float _speed = 15.0f;
     private float _turnSpeed = 45.0f;
 
     // Declaring variables.
@@ -28,14 +28,9 @@ public class PlayerController : MonoBehaviour
     private float _horizontalInput ;
     private float _verticalInput;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Obtain player controll inputs.
         _horizontalInput = Input.GetAxis("Horizontal");

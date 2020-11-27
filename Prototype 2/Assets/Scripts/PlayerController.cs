@@ -1,54 +1,49 @@
-﻿/*
- * File: PlayerController.cs
- * Project: Unity Junior Programmer Pathway - Prototype 2
- * File Created: Monday, 23rd November 2020 6:58:13 PM
- * Author: nknab
- * Email: bkojo21@gmail.com
- * Version: 1.0
- * Brief: 
- * -----
- * Last Modified: Monday, 23rd November 2020 10:25:33 PM
- * Modified By: nknab
- * -----
- * Copyright ©2020 nknab
- */
-
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float _xRange = 10.0f;
-    private float _speed = 10.0f;
-    private float _horizontalInput;
+    private float horizontalInput;
+    private float speed = 20.0f;
+    private float xRange = 20;
+    public GameObject projectilePrefab;
 
-    public GameObject projectilePrefab_;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        // Making sure the player does not go out of bounds
-        if (transform.position.x < -_xRange){
-            transform.position = new Vector3(-_xRange, transform.position.y, transform.position.z);
-        }
-        if (transform.position.x > _xRange){
-            transform.position = new Vector3(_xRange, transform.position.y, transform.position.z);
+        // Check for left and right bounds
+        if (transform.position.x < -xRange)
+        {
+            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)){
-            // Launch projectile from player when Spacebar is pressed.
-            Instantiate(projectilePrefab_, transform.position, projectilePrefab_.transform.rotation);
+        if (transform.position.x > xRange)
+        {
+            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
         }
 
-        _horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * _horizontalInput * Time.deltaTime * _speed);
+        // Player movement left to right
+        horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
+
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // No longer necessary to Instantiate prefabs
+            // Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+
+            // Get an object object from the pool
+            GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+            if (pooledProjectile != null)
+            {
+                pooledProjectile.SetActive(true); // activate it
+                pooledProjectile.transform.position = transform.position; // position it at player
+            }
+        }
+
+
+
     }
 }
